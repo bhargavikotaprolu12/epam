@@ -1,0 +1,11 @@
+CREATE EXTERNAL TABLE employees_json (
+  employees array<struct<
+    id: int,
+    name: string,
+    department: string,
+    salary: int
+  >>
+)
+ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
+WITH SERDEPROPERTIES ('ignore.malformed.json' = 'true')
+LOCATION 's3://epam-source-bucket/employeefile.json';
